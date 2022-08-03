@@ -14,11 +14,18 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>jitpack</id>
+            <url>https://jitpack.io/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
-            <groupId>me.mrgazdag</groupId>
+            <groupId>com.github.hibiscus-player</groupId>
             <artifactId>hibiscus-library-server</artifactId>
-            <version>1.0.0</version>
+            <version>64e02567e0</version>
         </dependency>
     </dependencies>
 
