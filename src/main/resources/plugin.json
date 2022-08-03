@@ -1,0 +1,8 @@
+{
+    "id": "hibiscus_default",
+    "name": "Hibiscus Default Content",
+    "description": "This plugin contains the default content for the Hibiscus Library Server",
+    "mainClass": "me.mrgazdag.hibiscus.defaultplugin.DefaultPlugin",
+    "apiVersion": "1.0.0",
+    "version": "1.0.0"
+}
