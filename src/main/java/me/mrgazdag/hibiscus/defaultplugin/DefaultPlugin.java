@@ -3,6 +3,7 @@ package me.mrgazdag.hibiscus.defaultplugin;
 import me.mrgazdag.hibiscus.library.event.Event;
 import me.mrgazdag.hibiscus.library.plugin.Plugin;
 import me.mrgazdag.hibiscus.library.ui.UIManager;
+import me.mrgazdag.hibiscus.library.ui.component.ButtonComponent;
 import me.mrgazdag.hibiscus.library.ui.component.TextBoxComponent;
 import me.mrgazdag.hibiscus.library.ui.component.TitleBoxComponent;
 import me.mrgazdag.hibiscus.library.ui.page.Page;
@@ -46,6 +47,11 @@ public class DefaultPlugin extends Plugin {
             public boolean test(ConnectedUser user) {
                 return !user.isGuest();
             }
+        });
+
+        ButtonComponent button = home.createButton();
+        button.onPress().setHandler((device, v) -> {
+            System.out.println(device.getDeviceId() + " pressed the button.");
         });
 
         home.register();
