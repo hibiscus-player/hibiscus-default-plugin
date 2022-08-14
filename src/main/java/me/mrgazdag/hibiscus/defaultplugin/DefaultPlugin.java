@@ -34,6 +34,7 @@ public class DefaultPlugin extends Plugin {
         TitleBoxComponent title = home.createTitleBox();
         title.getTitleText().setDefaultValue("Welcome!");
         title.getTitleText().addUserFilter(user -> "Welcome, " + user.getEffectiveName() + "!");
+        title.getSubtitleText().setDefaultValue("The server is running version " + getLibraryServer().getAPIVersion() + "!");
 
         TextBoxComponent box = home.createTextBox();
         box.getText().setDefaultValue("This is a __default__ message that has **Markdown**.");
