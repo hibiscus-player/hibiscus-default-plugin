@@ -2,6 +2,7 @@ package me.mrgazdag.hibiscus.defaultplugin;
 
 import me.mrgazdag.hibiscus.library.event.Event;
 import me.mrgazdag.hibiscus.library.plugin.Plugin;
+import me.mrgazdag.hibiscus.library.registry.Registry;
 import me.mrgazdag.hibiscus.library.ui.UIManager;
 import me.mrgazdag.hibiscus.library.ui.component.ButtonComponent;
 import me.mrgazdag.hibiscus.library.ui.component.TextBoxComponent;
@@ -21,12 +22,13 @@ public class DefaultPlugin extends Plugin {
         });
 
         UIManager ui = getLibraryServer().getUIManager();
+        Registry registry = getRegistry();
 
-        PageGroup group = new PageGroup(ui, "navigation");
+        PageGroup group = registry.createPageGroup("navigation");
         group.getGroupName().setDefaultValue("Navigation");
         group.register();
 
-        Page home = new Page(ui, "home");
+        Page home = registry.createPage("home");
         home.getPageName().setDefaultValue("Home");
         home.getPageIcon().setDefaultValue(PageIcons.MATERIAL_HOME);
         home.setGroup(group);
@@ -57,30 +59,30 @@ public class DefaultPlugin extends Plugin {
 
         home.register();
 
-        Page customTest = new Page(ui, "customTest", "param");
+        Page customTest = registry.createPage("customTest", "param");
         TextBoxComponent box2 = customTest.createTextBox();
         box2.getText().setDefaultValue("Default value lmao");
         box2.getText().addContextFilter(context -> String.valueOf(context.parameter("param")));
         customTest.setGroup(group);
         customTest.register();
 
-        Page search = new Page(ui, "search");
+        Page search = registry.createPage("search");
         search.getPageName().setDefaultValue("Search");
         search.getPageIcon().setDefaultValue(PageIcons.MATERIAL_SEARCH);
         search.setGroup(group);
         search.register();
 
-        PageGroup group2 = new PageGroup(ui, "othergroup");
+        PageGroup group2 = registry.createPageGroup("othergroup");
         group2.getGroupName().setDefaultValue("Other Group");
         group2.register();
 
-        Page playlists = new Page(ui, "playlists");
+        Page playlists = registry.createPage("playlists");
         playlists.getPageName().setDefaultValue("Playlists");
         playlists.getPageIcon().setDefaultValue(PageIcons.MATERIAL_LIBRARY_MUSIC);
         playlists.setGroup(group2);
         playlists.register();
 
-        Page live = new Page(ui, "live");
+        Page live = registry.createPage("live");
         live.getPageName().setDefaultValue("Live");
         live.getPageIcon().setDefaultValue(PageIcons.MATERIAL_PODCASTS);
         live.setGroup(group2);

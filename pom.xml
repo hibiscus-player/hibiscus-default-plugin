@@ -25,7 +25,7 @@
         <dependency>
             <groupId>com.github.hibiscus-player</groupId>
             <artifactId>hibiscus-library-server</artifactId>
-            <version>811d89d771</version>
+            <version>fd22780e28</version>
         </dependency>
     </dependencies>
 
