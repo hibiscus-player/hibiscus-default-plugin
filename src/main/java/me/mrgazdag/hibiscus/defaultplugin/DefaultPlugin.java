@@ -6,6 +6,7 @@ import me.mrgazdag.hibiscus.library.registry.Registry;
 import me.mrgazdag.hibiscus.library.ui.UIManager;
 import me.mrgazdag.hibiscus.library.ui.component.ButtonComponent;
 import me.mrgazdag.hibiscus.library.ui.component.TextBoxComponent;
+import me.mrgazdag.hibiscus.library.ui.component.TextInputComponent;
 import me.mrgazdag.hibiscus.library.ui.component.TitleBoxComponent;
 import me.mrgazdag.hibiscus.library.ui.page.Page;
 import me.mrgazdag.hibiscus.library.ui.page.PageGroup;
@@ -55,6 +56,16 @@ public class DefaultPlugin extends Plugin {
         ButtonComponent button = home.createButton();
         button.onPress().setHandler((device, v) -> {
             System.out.println(device.getDeviceId() + " pressed the button.");
+        });
+
+        TextBoxComponent box3 = home.createTextBox();
+        TextHandler textHandler = new TextHandler();
+        box3.getText().setDefaultValue("No input received yet.");
+        box3.getText().addDeviceFilter(textHandler);
+        TextInputComponent textInput = home.createTextInput();
+        textInput.onInputChange().setHandler((device, text) -> {
+            textHandler.put(device, text);
+            box3.getText().sendUpdate(device);
         });
 
         home.register();
