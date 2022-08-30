@@ -4,10 +4,7 @@ import me.mrgazdag.hibiscus.library.event.Event;
 import me.mrgazdag.hibiscus.library.plugin.Plugin;
 import me.mrgazdag.hibiscus.library.registry.Registry;
 import me.mrgazdag.hibiscus.library.ui.UIManager;
-import me.mrgazdag.hibiscus.library.ui.component.ButtonComponent;
-import me.mrgazdag.hibiscus.library.ui.component.TextBoxComponent;
-import me.mrgazdag.hibiscus.library.ui.component.TextInputComponent;
-import me.mrgazdag.hibiscus.library.ui.component.TitleBoxComponent;
+import me.mrgazdag.hibiscus.library.ui.component.*;
 import me.mrgazdag.hibiscus.library.ui.page.Page;
 import me.mrgazdag.hibiscus.library.ui.page.PageGroup;
 import me.mrgazdag.hibiscus.library.ui.page.PageIcons;
@@ -34,10 +31,14 @@ public class DefaultPlugin extends Plugin {
         home.getPageIcon().setDefaultValue(PageIcons.MATERIAL_HOME);
         home.setGroup(group);
 
+        BlockLayoutComponent layout = home.createBlockLayout();
+        home.setRootElement(layout);
+
         TitleBoxComponent title = home.createTitleBox();
         title.getTitleText().setDefaultValue("Welcome!");
         title.getTitleText().addUserFilter(user -> "Welcome, " + user.getEffectiveName() + "!");
         title.getSubtitleText().setDefaultValue("The server is running version " + getLibraryServer().getAPIVersion() + "!");
+        layout.addChild(title);
 
         TextBoxComponent box = home.createTextBox();
         box.getText().setDefaultValue("This is a __default__ message that has **Markdown**.");
@@ -52,11 +53,13 @@ public class DefaultPlugin extends Plugin {
                 return !user.isGuest();
             }
         });
+        layout.addChild(box);
 
         ButtonComponent button = home.createButton();
         button.onPress().setHandler((device, v) -> {
             System.out.println(device.getDeviceId() + " pressed the button.");
         });
+        layout.addChild(button);
 
         TextBoxComponent box3 = home.createTextBox();
         TextHandler textHandler = new TextHandler();
@@ -67,6 +70,8 @@ public class DefaultPlugin extends Plugin {
             textHandler.put(device, text);
             box3.getText().sendUpdate(device);
         });
+        layout.addChild(box3);
+        layout.addChild(textInput);
 
         home.register();
 
@@ -74,6 +79,7 @@ public class DefaultPlugin extends Plugin {
         TextBoxComponent box2 = customTest.createTextBox();
         box2.getText().setDefaultValue("Default value lmao");
         box2.getText().addContextFilter(context -> String.valueOf(context.parameter("param")));
+        customTest.setRootElement(box2);
         customTest.setGroup(group);
         customTest.register();
 
